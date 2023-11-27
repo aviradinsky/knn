@@ -5,9 +5,9 @@ import math
 import pandas as pd
 import numpy as np
 
-e_ans = []
-h_ans = []
-m_ans = []
+e_ans = []  # List to store accuracy results for Euclidean distance
+h_ans = []  # List to store accuracy results for Hamming distance
+m_ans = []  # List to store accuracy results for Manhattan distance
 
 
 class DistClass:
@@ -17,6 +17,7 @@ class DistClass:
 
 
 def euclidean_distance(instance1, instance2, length):
+    # Calculate Euclidean distance between two instances
     distance = 0
     for x in range(length):
         num1 = float(instance1[x])
@@ -26,16 +27,19 @@ def euclidean_distance(instance1, instance2, length):
 
 
 def hamming_distance(instance1, instance2, length):
+    # Calculate Hamming distance between two instances
     distance = sum(c1 != c2 for c1, c2 in zip(instance1, instance2))
     return distance
 
 
 def manhattan_distance(instance1, instance2, length):
+    # Calculate Manhattan distance between two instances
     distance = sum(abs(num1 - num2) for num1, num2 in zip(instance1, instance2))
     return distance
 
 
 def classify_point(k, point, dataset, distance_func):
+    # Classify a point based on k-nearest neighbors using the specified distance function
     distances = []
 
     for data in dataset:
