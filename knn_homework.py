@@ -217,6 +217,11 @@ manhattan,0.61,0.63,0.69
 """
 
 """
+k = 7 is the best for euclidean distance with an accuracy of 74%
+for k = 7 and hamming and manhattan you get worse values of 55% and 63% respectively
+"""
+
+"""
 1. What is the label for point if k=1?
 The label for the point when k=1 using Euclidean distance is obtained from the nearest neighbor, so you would need to check the label of the closest data point to the given point.
 In this case, you can look at the label of the closest point in euc_distances.
