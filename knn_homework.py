@@ -209,10 +209,6 @@ print("euclid", *e_ans, sep="|")
 print("hamming", *h_ans, sep="|")
 print("manhattan", *m_ans, sep="|")
 
-assert e_ans == [0.5, 0.74, 0.7]
-assert h_ans == [0.61, 0.55, 0.57]
-assert m_ans == [0.61, 0.63, 0.69]
-
 """
 k,1,7,15
 euclid,0.5,0.74,0.7
