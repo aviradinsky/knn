@@ -67,10 +67,6 @@ url = "https://github.com/rosenfa/ai/blob/master/myFile.csv?raw=true"
 df = pd.read_csv(url, header=0, on_bad_lines="skip")
 dataset = np.array(df)
 
-# Print the first two vectors in the file
-
-# Print the Euclidean distance between those two vectors
-
 # Assume you have a new value for point: [0, 0, 100]
 point = [0, 0, 100]
 euc_distances = []
@@ -131,8 +127,6 @@ for k in k_values:
         result_euc.append(label_euc)
 
     accuracy_euc = np.mean(result_euc == test_data[:, -1])
-    # print(f"\nK = {k} with Euclidean distance:")
-    # print("Accuracy:", accuracy_euc)
     e_ans.append(accuracy_euc)
 
 # Now see if using Hamming or Manhattan distance gives better results
@@ -150,13 +144,9 @@ for k in k_values:
     accuracy_ham = np.mean(result_ham == test_data[:, -1])
     accuracy_man = np.mean(result_man == test_data[:, -1])
 
-    # print(f"\nK = {k} with Hamming distance:")
-    # print("Accuracy:", accuracy_ham)
     h_ans.append(accuracy_ham)
-
-    # print(f"\nK = {k} with Manhattan distance:")
-    # print("Accuracy:", accuracy_man)
     m_ans.append(accuracy_man)
+
 print("|||||")
 print("|-|-|-|-|")
 print("k", 1, 7, 15, sep="|")
