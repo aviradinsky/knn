@@ -10,7 +10,7 @@ h_ans = []  # List to store accuracy results for Hamming distance
 m_ans = []  # List to store accuracy results for Manhattan distance
 
 
-class DistClass:
+class Clazz:
     def __init__(self, dist=-1, tag="-"):
         self.dist = dist
         self.tag = tag
@@ -45,7 +45,7 @@ def classify_point(k, point, dataset, distance_func):
     for data in dataset:
         label = data[-1]
         d = distance_func(point, data[:-1], len(point))
-        obj = DistClass(dist=d, tag=label)
+        obj = Clazz(dist=d, tag=label)
         distances.append(obj)
 
     distances.sort(key=lambda x: x.dist)
@@ -78,7 +78,7 @@ euc_distances = []
 for temp in dataset:
     label = temp[-1]
     d = euclidean_distance(point, temp, 3)
-    obj = DistClass()
+    obj = Clazz()
     obj.dist = d
     obj.tag = label
     euc_distances.append(obj)
@@ -99,12 +99,12 @@ for temp in dataset:
     d_ham = hamming_distance(point, temp[:-1], 3)
     d_man = manhattan_distance(point, temp[:-1], 3)
 
-    obj_ham = DistClass()
+    obj_ham = Clazz()
     obj_ham.dist = d_ham
     obj_ham.tag = label
     ham_distances.append(obj_ham)
 
-    obj_man = DistClass()
+    obj_man = Clazz()
     obj_man.dist = d_man
     obj_man.tag = label
     man_distances.append(obj_man)
