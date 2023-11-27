@@ -39,21 +39,44 @@ def manhattan_distance(instance1, instance2, length):
 
 
 def classify_point(k, point, dataset, distance_func):
-    # Classify a point based on k-nearest neighbors using the specified distance function
+    """
+    Classify a point based on k-nearest neighbors using the specified distance function.
+
+    Parameters:
+    - k (int): Number of neighbors to consider.
+    - point (list): The point to be classified.
+    - dataset (list): The dataset containing labeled points.
+    - distance_func (function): The distance function to calculate distances between points.
+
+    Returns:
+    - str: The predicted label for the given point.
+    """
+
+    # Step 1: Calculate distances between the given point and all points in the dataset
     distances = []
 
     for data in dataset:
+        # Extract the label and calculate the distance
         label = data[-1]
         d = distance_func(point, data[:-1], len(point))
+
+        # Create an object to store the distance and label
         obj = Clazz(dist=d, tag=label)
         distances.append(obj)
 
+    # Step 2: Sort the distances in ascending order
     distances.sort(key=lambda x: x.dist)
+
+    # Step 3: Select the k-nearest neighbors
     k_nearest = distances[:k]
 
+    # Step 4: Extract labels from the k-nearest neighbors
     labels = [obj.tag for obj in k_nearest]
+
+    # Step 5: Determine the most common label among the k-nearest neighbors
     result = max(set(labels), key=labels.count)
 
+    # Step 6: Return the predicted label
     return result
 
 
@@ -94,21 +117,34 @@ euc_distances.sort(key=lambda x: x.dist)
 ham_distances = []
 man_distances = []
 
+# Loop through each data point in the dataset
 for temp in dataset:
+    # Extract the label of the current data point
     label = temp[-1]
+
+    # Calculate Hamming distance between the given point and the current data point
     d_ham = hamming_distance(point, temp[:-1], 3)
+
+    # Calculate Manhattan distance between the given point and the current data point
     d_man = manhattan_distance(point, temp[:-1], 3)
 
+    # Create an object to store Hamming distance, label, and tag
     obj_ham = Clazz()
     obj_ham.dist = d_ham
     obj_ham.tag = label
+
+    # Append the object to the list of Hamming distances
     ham_distances.append(obj_ham)
 
+    # Create an object to store Manhattan distance, label, and tag
     obj_man = Clazz()
     obj_man.dist = d_man
     obj_man.tag = label
+
+    # Append the object to the list of Manhattan distances
     man_distances.append(obj_man)
 
+# Sort the lists of Hamming and Manhattan distances based on the distance value
 ham_distances.sort(key=lambda x: x.dist)
 man_distances.sort(key=lambda x: x.dist)
 
@@ -122,32 +158,47 @@ train_data = np.array(pd.read_csv(url_train, header=0, on_bad_lines="skip"))
 test_data = np.array(pd.read_csv(url_test, header=0, on_bad_lines="skip"))
 
 
-# Implement the knn code with 3 different values for k and Euclidean distance
+# Implement the k-NN code with 3 different values for k and Euclidean distance
 k_values = [1, 7, 15]
+
+# Loop over each k value
 for k in k_values:
+    # Initialize an empty list to store the results for Euclidean distance
     result_euc = []
+
+    # Loop over each test data point
     for test_point in test_data:
+        # Classify the test point using k-NN with Euclidean distance
         label_euc = classify_point(k, test_point[:-1], train_data, euclidean_distance)
         result_euc.append(label_euc)
 
+    # Calculate the accuracy for Euclidean distance and append to the result list
     accuracy_euc = np.mean(result_euc == test_data[:, -1])
     e_ans.append(accuracy_euc)
 
 # Now see if using Hamming or Manhattan distance gives better results
+
+# Loop over each k value
 for k in k_values:
+    # Initialize empty lists to store the results for Hamming and Manhattan distances
     result_ham = []
     result_man = []
 
+    # Loop over each test data point
     for test_point in test_data:
+        # Classify the test point using k-NN with Hamming distance
         label_ham = classify_point(k, test_point[:-1], train_data, hamming_distance)
-        label_man = classify_point(k, test_point[:-1], train_data, manhattan_distance)
-
         result_ham.append(label_ham)
+
+        # Classify the test point using k-NN with Manhattan distance
+        label_man = classify_point(k, test_point[:-1], train_data, manhattan_distance)
         result_man.append(label_man)
 
+    # Calculate the accuracy for Hamming and Manhattan distances and append to the result lists
     accuracy_ham = np.mean(result_ham == test_data[:, -1])
     accuracy_man = np.mean(result_man == test_data[:, -1])
 
+    # Append the accuracies to the respective lists
     h_ans.append(accuracy_ham)
     m_ans.append(accuracy_man)
 
