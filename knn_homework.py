@@ -157,11 +157,12 @@ for k in k_values:
     # print(f"\nK = {k} with Manhattan distance:")
     # print("Accuracy:", accuracy_man)
     m_ans.append(accuracy_man)
-
-print("k", 1, 7, 15, sep=",")
-print("euclid", *e_ans, sep=",")
-print("hamming", *h_ans, sep=",")
-print("manhattan", *m_ans, sep=",")
+print("|||||")
+print("|-|-|-|-|")
+print("k", 1, 7, 15, sep="|")
+print("euclid", *e_ans, sep="|")
+print("hamming", *h_ans, sep="|")
+print("manhattan", *m_ans, sep="|")
 
 assert e_ans == [0.5, 0.74, 0.7]
 assert h_ans == [0.61, 0.55, 0.57]
