@@ -164,3 +164,21 @@ euclid,0.5,0.74,0.7
 hamming,0.61,0.55,0.57
 manhattan,0.61,0.63,0.69
 """
+
+"""
+1. What is the label for point if k=1?
+The label for the point when k=1 using Euclidean distance is obtained from the nearest neighbor, so you would need to check the label of the closest data point to the given point.
+In this case, you can look at the label of the closest point in euc_distances.
+
+2. What is the label for point if k=3?
+For k=3, you need to consider the labels of the three nearest neighbors and choose the most common label among them.
+This information is stored in euc_distances.
+The result for k=3 is obtained by checking the most frequent label among the three closest neighbors.
+
+3. Would the result be different if we used a different distance function like Hamming or Manhattan?
+Yes, the result would likely be different if you use a different distance function.
+The choice of distance function affects how the algorithm measures the similarity between data points.
+Different distance functions are suitable for different types of data.
+For example, Euclidean distance is suitable for continuous numerical data, while Hamming distance is suitable for categorical data with a binary representation.
+Manhattan distance is another option for numerical data, but it considers the sum of absolute differences instead of squared differences.
+"""
